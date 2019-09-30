@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react'
 
 class PersonList extends Component {
 
@@ -6,15 +6,16 @@ class PersonList extends Component {
     return (
       <div>
         <ul className="PersonList">
-            {this.props.people.map((person) =>
-            <li key={person.id} onClick={() => this.props.goToPersonEdit(person)}>{person.firstName} {person.lastName}</li>)}
+          {this.props.people.map((person) =>
+            <li key={person.id}
+                onClick={() => this.props.goToPersonEdit(person)}>{person.firstName} {person.lastName}</li>)}
         </ul>
         <button className="button-primary" onClick={() => this.props.goToPersonAdd()}>
-        Add a Person
+          Add a Person
         </button>
-      </div>          
-    );
+      </div>
+    )
   }
 }
 
-export default PersonList;
+export default PersonList
