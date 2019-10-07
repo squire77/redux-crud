@@ -1,4 +1,6 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { editPerson, deletePerson, setView } from './actions'
 
 class PersonEdit extends Component {
 
@@ -10,6 +12,18 @@ class PersonEdit extends Component {
       lastName: props.selectedPerson.lastName,
       id: props.selectedPerson.id
     }
+  }
+
+  goHome = () => {
+    this.props.setView('PersonList')
+  }
+
+  saveChanges = () => {
+    this.props.editPerson(this.state)
+  }
+
+  deletePerson = () => {
+    this.props.deletePerson(this.state.id)
   }
 
   changeFirstName = (event) => {
@@ -28,18 +42,22 @@ class PersonEdit extends Component {
     return (
       <div className="PersonEdit">
         <span>Editing Person</span>
-        <input type="text" name="firstName" value={this.state.firstName}
-               onChange={this.changeFirstName}/>
-        <input type="text" name="lastName" value={this.state.lastName}
-               onChange={this.changeLastName}/>
+        <input type="text" name="firstName" value={this.state.firstName} onChange={this.changeFirstName} />
+        <input type="text" name="lastName" value={this.state.lastName} onChange={this.changeLastName} />
         <div className="PersonEditBtns">
-          <button className="button-primary" onClick={() => this.props.saveChanges(this.state)}>SAVE</button>
-          <button className="button-primary" onClick={() => this.props.goHome()}>CANCEL</button>
-          <button className="button-primary danger" onClick={this.props.deletePerson}>DELETE PERSON</button>
+          <button className="button-primary" onClick={() => this.saveChanges()}>SAVE</button>
+          <button className="button-primary" onClick={() => this.goHome()}>CANCEL</button>
+          <button className="button-primary danger" onClick={this.deletePerson}>DELETE PERSON</button>
         </div>
       </div>
     )
   }
 }
 
-export default PersonEdit
+const mapStateToProps = state => ({ selectedPerson: state.selectedPerson })
+const mapDispatchToProps = dispatcher => ({
+  editPerson: state => dispatcher((editPerson(state.firstName, state.lastName, state.id))),
+  deletePerson: id => dispatcher((deletePerson(id))),
+  setView: view => dispatcher((setView(view)))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(PersonEdit)

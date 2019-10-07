@@ -1,15 +1,21 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import { addPerson, setView } from './actions'
 
 class PersonAdd extends Component {
 
-  constructor(props) {
-    super(props)
+  state = {
+    firstName: '',
+    lastName: '',
+    id: 0
+  }
+  
+  goHome = () => {
+    this.props.setView('PersonList')
+  }
 
-    this.state = {
-      firstName: '',
-      lastName: '',
-      id: ''
-    }
+  saveNewPerson = () => {
+    this.props.addPerson(this.state.firstName, this.state.lastName)
   }
 
   changeFirstName = (event) => {
@@ -37,12 +43,18 @@ class PersonAdd extends Component {
                id="lastName"
                onChange={this.changeLastName}/>
         <div className="PersonAddBtns">
-          <button className="button-primary" onClick={() => this.props.saveNewPerson(this.state)}>SAVE</button>
-          <button className="button-primary" onClick={() => this.props.goHome()}>CANCEL</button>
+          <button className="button-primary" onClick={() => this.saveNewPerson()}>SAVE</button>
+          <button className="button-primary" onClick={() => this.goHome()}>CANCEL</button>
         </div>
       </div>
     )
   }
 }
 
-export default PersonAdd
+const mapStateToProps = state => ( { selectedPerson: state.selectedPerson } )
+const mapDispatchToProps = dispatcher => ({
+  addPerson: (first, last) => dispatcher((addPerson(first, last))),
+  setView: view => dispatcher((setView(view)))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonAdd)
