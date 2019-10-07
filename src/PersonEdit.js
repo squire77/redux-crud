@@ -56,7 +56,7 @@ class PersonEdit extends Component {
 
 const mapStateToProps = state => ({ selectedPerson: state.selectedPerson })
 const mapDispatchToProps = dispatcher => ({
-  editPerson: state => dispatcher(editPerson(state.firstName, state.lastName, state.id)),
+  editPerson: person => dispatcher(editPerson(person)),
   deletePerson: id => dispatcher(deletePerson(id)),
   setView: view => dispatcher(setView(view))
 })

@@ -30,9 +30,9 @@ const reducer = (prevState = undefined, action) => {
         case EDIT_PERSON:
             console.log("reducer: edit person")
             return {
-                people: prevState.people.map((person) => {
-                    return (person.id === action.id) ?
-                        { ...person, firstName: action.firstName, lastName: action.lastName } : person
+                people: prevState.people.map((oldPerson) => {
+                    return (oldPerson.id === action.person.id) ?
+                        { ...oldPerson, firstName: action.person.firstName, lastName: action.person.lastName } : oldPerson
                 }),
                 view: 'PersonList',
                 selectedPerson: undefined

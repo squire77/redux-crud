@@ -28,12 +28,10 @@ export const addPerson = (firstName, lastName) => {
     }
 }
 
-export const editPerson = (firstName, lastName, id) => {
+export const editPerson = (person) => {
     return {
         type: EDIT_PERSON,
-        firstName,
-        lastName,
-        id
+        person
     }
 }
 
