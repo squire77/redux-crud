@@ -1,4 +1,4 @@
-import { SET_VIEW, ADD_PERSON, EDIT_PERSON, DELETE_PERSON, SET_SELECTED_PERSON } from './actions'
+import { SET_VIEW, ADD_PERSON, EDIT_PERSON, DELETE_PERSON, SET_EDIT_VIEW } from './actions'
 import uuid from 'uuid'
 
 const initialState = {
@@ -44,15 +44,12 @@ const reducer = (prevState = undefined, action) => {
                 view: 'PersonList',
                 selectedPerson: undefined
             }
-        case SET_SELECTED_PERSON:
-            console.log("reducer: set selected person")
+        case SET_EDIT_VIEW:
+            console.log("reducer: set edit person")
             return {
                 ...prevState,
-                selectedPerson: {
-                    firstName: action.firstName,
-                    lastName: action.lastName,
-                    id: action.id
-                }
+                selectedPerson: action.person,
+                view: action.view
             }
         default:
             return { ...prevState }

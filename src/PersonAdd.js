@@ -9,7 +9,7 @@ class PersonAdd extends Component {
     lastName: '',
     id: 0
   }
-  
+
   goHome = () => {
     this.props.setView('PersonList')
   }
@@ -53,8 +53,8 @@ class PersonAdd extends Component {
 
 const mapStateToProps = state => ( { selectedPerson: state.selectedPerson } )
 const mapDispatchToProps = dispatcher => ({
-  addPerson: (first, last) => dispatcher((addPerson(first, last))),
-  setView: view => dispatcher((setView(view)))
+  addPerson: (first, last) => dispatcher(addPerson(first, last)),
+  setView: view => dispatcher(setView(view))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonAdd)

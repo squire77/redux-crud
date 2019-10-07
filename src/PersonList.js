@@ -1,18 +1,17 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { setView, setSelectedPerson } from './actions'
+import { setView, setEditView } from './actions'
 
 class PersonList extends Component {
 
   handleAdd = () => {
-    console.log("handleAdd:")
+    console.log("handleAdd")
     this.props.setView("PersonAdd")
   }
 
   handleEdit = (person) => {
     console.log("handleEdit " + person)
-    this.props.setSelectedPerson(person)
-    this.props.setView("PersonEdit")
+    this.props.setEditView(person)
   }
 
   render() {
@@ -33,7 +32,7 @@ class PersonList extends Component {
 
 const mapStateToProps = state => ( { people: state.people } )
 const mapDispatchToProps = dispatcher => ({
-  setView: view => dispatcher((setView(view))),
-  setSelectedPerson: person => dispatcher((setSelectedPerson(person.firstName, person.lastName, person.id)))
+  setView: view => dispatcher(setView(view)),
+  setEditView: person => dispatcher(setEditView(person, "PersonEdit"))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(PersonList)

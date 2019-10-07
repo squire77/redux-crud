@@ -2,7 +2,7 @@ export const SET_VIEW = 'SET_VALUE'
 export const ADD_PERSON = 'ADD_PERSON'
 export const EDIT_PERSON = 'EDIT_PERSON'
 export const DELETE_PERSON = 'DELETE_PERSON'
-export const SET_SELECTED_PERSON = 'SET_SELECTED_PERSON'
+export const SET_EDIT_VIEW = 'SET_EDIT_VIEW'
 
 export const setView = (view) => {
     return {
@@ -11,12 +11,12 @@ export const setView = (view) => {
     }
 }
 
-export const setSelectedPerson = (firstName, lastName, id) => {
+export const setEditView = (person, view) => {
+    console.log(person.id)
     return {
-        type: SET_SELECTED_PERSON,
-        firstName,
-        lastName,
-        id
+        type: SET_EDIT_VIEW,
+        person,
+        view
     }
 }
 
